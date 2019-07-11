@@ -19,7 +19,7 @@ def include_readme():
 
 setup(
     name='python-smartgadget',
-    version='0.1.1',
+    version='0.1.2',
     packages=['sensirionbt'],
     python_requires='>=3.4',
     install_requires=['bluepy>=1.0.5'],

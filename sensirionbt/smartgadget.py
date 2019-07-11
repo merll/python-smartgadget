@@ -83,19 +83,19 @@ class SmartGadget:
             self.init()
         return self._firmware_version
 
-    def get_temperature(self) -> float:
+    def get_temperature(self, round_digits=2) -> float:
         with self._conn as c:
-            return _get_temperature(c)
+            return round(_get_temperature(c), round_digits)
 
-    def get_humidity(self) -> float:
+    def get_humidity(self, round_digits=2) -> float:
         with self._conn as c:
-            return _get_humidity(c)
+            return round(_get_humidity(c), round_digits)
 
     def get_battery_level(self) -> int:
         with self._conn as c:
             return _get_battery_level(c)
 
-    def get_values(self, init_static=False) -> dict:
+    def get_values(self, init_static=False, round_digits=2) -> dict:
         with self._conn as c:
             if not self._initialized and init_static:
                 self._read_id(c)
@@ -103,7 +103,7 @@ class SmartGadget:
             humidity = _get_humidity(c)
             battery_level = _get_battery_level(c)
         return {
-            'temperature': temperature,
-            'humidity': humidity,
+            'temperature': round(temperature, round_digits),
+            'humidity': round(humidity, round_digits),
             'battery_level': battery_level,
         }
