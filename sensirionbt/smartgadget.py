@@ -62,6 +62,10 @@ class SmartGadget:
             self._read_id(c)
 
     @property
+    def mac(self):
+        return self._conn.mac
+
+    @property
     def manufacturer(self) -> str:
         if not self._initialized:
             self.init()
